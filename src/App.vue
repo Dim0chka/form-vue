@@ -18,20 +18,20 @@
 				@updated="onUpdated(i, $event)"
 				>
 			</app-input-field>
-			<el-button type="primary" :disabled="!checkValid" @click="dialogVisible = true">Send Data</el-button>
+			<el-button :type="checkValid ? 'success' : 'danger'" :disabled="!checkValid" @click="showModal">Send Data</el-button>
 		</el-form>
 		<el-text v-else type="success" style="font-size: 40px;">
 			All done 
 		</el-text>
-		<el-dialog v-model="dialogVisible" title="Shipping address">
+		<el-dialog v-model="dialogVisible" title="Check data">
 			<el-table border :data="info" style="width: 100%">
 				<el-table-column type="index" width="50" />
 				<el-table-column prop="label" label="Label" width="300" />
 				<el-table-column prop="value" label="Value"  />
 			</el-table>
 			<template #footer>
-				<el-button @click="dialogVisible = false">Cancel</el-button>
-				<el-button type="primary" @click="sendForm">Confirm</el-button>
+				<el-button  @click="dialogVisible = false">Cancel</el-button>
+				<el-button type="success" @click="sendForm">Confirm</el-button>
 			</template>
     	</el-dialog>
 
@@ -51,7 +51,7 @@ export default {
       info: [
 		{
 			label: 'Name',
-			value: '',
+			value: 'dd',
 			pattern: /^[a-zA-Z ]{2,30}$/
 		},
 		{
@@ -85,7 +85,7 @@ export default {
 			field.value = val.trim();
 			field.valid = field.pattern.test(field.value);
 		},
-		showForm() {
+		showModal() {
 			if (this.checkValid) {
 				this.dialogVisible = true 
 			}
@@ -101,7 +101,7 @@ export default {
 		},
 		
 		checkValid() {
-			return this.validField >= this.info.length
+			return this.validField === this.info.length
 		}
 	},
 	created(){

@@ -19,7 +19,7 @@
                         />
                     </transition>
                 </template>                    
-                <el-input placeholder="Please input" :value="value" v-model="text" @input="updateInput" autocomplete="off"/>
+                <el-input placeholder="Please input" :value="value" v-model="text"  @input="updateInput" autocomplete="off"/>
             </el-form-item>
         </el-col>
 </template>
@@ -43,7 +43,7 @@ export default {
     },
     data() {
         return {
-            activated: false,
+            activated: this.value != '',
             text: '',
             flipped: false 
         }

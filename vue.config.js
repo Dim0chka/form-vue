@@ -12,5 +12,12 @@ module.exports = defineConfig({
         resolvers: [ElementPlusResolver()],
       }),
     ],
-  }
+  },
+  devServer: {
+        client: {
+            overlay: {
+                runtimeErrors: false,
+            },
+      },
+    },
 })
